@@ -63,7 +63,7 @@ exports.updateProduct = async (req, res) => {
 exports.fetchAllProducts = async (req, res) => {
     let query = Product.find({ deleted: { $ne: true } })
     let totalCountQuery = Product.find({ deleted: { $ne: true } })
-    if (req.query.search!=='undefined'&&req.query.search) {
+    if (req.query.search !== 'undefined' && req.query.search) {
         query = query.find({ title: { $regex: req.query.search, $options: 'i' } })
         totalCountQuery = totalCountQuery.find({ title: { $regex: req.query.search, $options: 'i' } })
     }
@@ -79,7 +79,7 @@ exports.fetchAllProducts = async (req, res) => {
         query = query.sort({ [req.query._sort]: req.query._order })
     }
 
-    const totalDocs = await totalCountQuery.count().exec();
+    const totalDocs = (await totalCountQuery.exec()).length;
 
     if (req.query._page && req.query._limit) {
         const pageSize = req.query._limit;
@@ -102,7 +102,7 @@ exports.fetchAllProducts = async (req, res) => {
 exports.fetchAllProductsForAdmin = async (req, res) => {
     let query = Product.find({})
     let totalCountQuery = Product.find({})
-    if (req.query.search!=='undefined'&&req.query.search) {
+    if (req.query.search !== 'undefined' && req.query.search) {
         query = query.find({ title: { $regex: req.query.search, $options: 'i' } })
         totalCountQuery = totalCountQuery.find({ title: { $regex: req.query.search, $options: 'i' } })
     }

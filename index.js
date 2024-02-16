@@ -60,28 +60,6 @@ server.get('*', (req, res) =>
 );
 
 
-
-
-
-// const stripe = require('stripe')('sk_test_51OZyHpSEiBWleYnHCrzE5p9DF8XvqeqJVP1e8GqBwgmweDcGS6hlFmwE23zskR0hf1NVYgMnrKBjMqHneYIA8GSx00Q6hBGHsA');
-
-// server.post('/create-payment-intent', async (req, res) => {
-//     const { totalAmount, orderId } = req.body;
-
-//     const paymentIntent = await stripe.paymentIntents.create({
-//         amount: Number(totalAmount * 100), // for decimal compensation
-//         currency: "INR",
-//         payment_method_types: ['card'],
-//         description: 'Payment for your goods',
-//         metadata: {
-//             orderId,
-//         },
-//     });
-//     res.send({
-//         clientSecret: paymentIntent.client_secret,
-//     });
-// });
-
 server.post("/create-checkout-session", async (req, res) => {
     const products = req.body;
 
