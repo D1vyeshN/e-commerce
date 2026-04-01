@@ -27,7 +27,7 @@ exports.createUser = async (req, res) => {
                         res.cookie('jwt', token, {
                             expires: new Date(Date.now() + 3600000),
                             httpOnly: true,
-                        }).status(201).json({massage:"User Successfully Registered!!!" });
+                        }).status(201).json({ massage: "User Successfully Registered!!!" });
                     }
                 })
             })
@@ -59,18 +59,18 @@ exports.createUser = async (req, res) => {
 // }
 
 exports.checkUser = async (req, res) => {
+    console.log(req.user,"checkuser");
     if (req.user) {
         res.json(req.user);
-      } else {
+    } else {
         res.sendStatus(401);
-      }
+    }
 }
 exports.loginUser = async (req, res) => {
     const user = req.user;
-
     res.cookie('jwt', user.token, {
-        sameSite:'lax',
-        secure:false,
+        sameSite: 'lax',
+        secure: false,
         expires: new Date(Date.now() + 3600000),
         httpOnly: true,
     }).status(200).json(user);
@@ -79,9 +79,9 @@ exports.loginUser = async (req, res) => {
 
 exports.logout = async (req, res) => {
     res
-      .cookie('jwt', null, {
-        expires: new Date(Date.now()),
-        httpOnly: true,
-      })
-      .sendStatus(200)
-  };
+        .cookie('jwt', null, {
+            expires: new Date(Date.now()),
+            httpOnly: true,
+        })
+        .sendStatus(200)
+};
